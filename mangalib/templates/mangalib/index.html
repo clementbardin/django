@@ -1,0 +1,43 @@
+<!-- 23:43 -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mangalib - Accueil</title>
+    <link rel="stylesheet" href="{% static 'static/mangalib/global.css' %}" />
+  </head>
+  <body>
+
+    {% if user.is_authenticated %}
+      <p>Connecté sous {{ user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a></p>
+    {% else %}
+      <p><a href="{% url 'accounts:login' %}">Connexion</a>
+      <a href="{% url 'accounts:register' %}">Inscription</a></p>
+    {% endif %}
+
+    <h1>Bienvenue sur MangaLib !</h1>
+
+    <p><a href="{% url 'mangalib:add' %}">+ Ajouter un livre</a></p>
+
+    <table>
+      <tr>
+        <th>NOM</th>
+        <th>AUTEUR</th>
+        <th>QUANTITE</th>
+        <th colspan="2">ACTIONS</th>
+      </tr>
+      {% for book in books %}
+        <tr>
+          <td><a href="{% url 'mangalib:show' book.id %}">{{ book.title }}</a></td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.quantity }}</td>
+          <td><a href="{% url 'mangalib:edit' book.id %}">[Edit]</a></td>
+          <td><a href="{% url 'mangalib:delete' book.id %}">[Delete]</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+  </body>
+</html>

@@ -1,0 +1,17 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 2rem;
+}
+
+ul {
+    padding-left: 100px;
+}
+
+p {
+    color: white;
+}
